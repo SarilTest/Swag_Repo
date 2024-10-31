@@ -12,7 +12,7 @@ import java.time.Duration;
 
 public class BaseTest {
     protected WebDriver driver;
-    //protected String url = "https://www.saucedemo.com/v1/index.html";
+   
 
     @BeforeClass
     public void setup() {
@@ -36,8 +36,8 @@ public class BaseTest {
 
         // Verify successful login by checking the presence of an element on the Products page
         boolean isOnProductsPage = driver.findElements(By.className("inventory_list")).size() > 0;
-        //Assert.assertTrue(isOnProductsPage, "Login failed or Products page not displayed");
-        Assert.assertTrue(isOnProductsPage);
+        Assert.assertTrue(isOnProductsPage, "Login failed or Products page not displayed");
+        //Assert.assertTrue(isOnProductsPage);
     }
 
     @AfterClass
