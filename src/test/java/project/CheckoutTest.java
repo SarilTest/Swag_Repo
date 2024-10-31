@@ -10,9 +10,9 @@ public class CheckoutTest extends BaseTest {
     @Test
     public void completeCheckoutProcess() {
         // Step 1: Add two products to the cart
-        WebElement addToCartButton1 = driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[1]/div[1]/div[3]/button[1]"));
-        WebElement addToCartButton2 = driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[1]/div[2]/div[3]/button[1]"));
-        addToCartButton1.click();
+    	WebElement addToCartButton1 = driver.findElement(By.xpath("(//button[contains(text(),'ADD TO CART')])[1]"));
+    	addToCartButton1.click();
+        WebElement addToCartButton2 = driver.findElement(By.xpath("(//button[contains(text(),'ADD TO CART')])[2]"));
         addToCartButton2.click();
 
         // Step 2: Verify cart badge shows 2 items
@@ -43,7 +43,7 @@ public class CheckoutTest extends BaseTest {
 
         // Step 7: Verify that the overview page displays correct items and total amount
         WebElement product1 = driver.findElement(By.xpath("//div[text()='Sauce Labs Backpack']"));
-        WebElement product2 = driver.findElement(By.xpath("//div[text()='Sauce Labs Bike Light']"));
+        WebElement product2 = driver.findElement(By.xpath("//div[text()='Sauce Labs Bolt T-Shirt']"));
         WebElement totalAmount = driver.findElement(By.className("summary_total_label"));
 
         Assert.assertTrue(product1.isDisplayed(), "Product 'Sauce Labs Backpack' is not displayed on the checkout overview page.");
