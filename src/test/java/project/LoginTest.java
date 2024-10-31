@@ -3,14 +3,11 @@ package project;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
-import java.time.Duration;
 
 
 /**
@@ -19,25 +16,15 @@ import java.time.Duration;
 
 public class LoginTest {
     WebDriver driver;
-    String url = "https://www.saucedemo.com/v1/index.html";
 
     @BeforeClass
     public void setup() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\saril\\eclipse-workspace\\Testing\\Drivers\\chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
-        driver.get(url);
+    	driver= TestUtil.setupDriver();
     }
 
    @DataProvider(name = "loginData")
    public Object[][] loginDataProvider() {
-       return new Object[][]{
-           {"standard_user", "secret_sauce", true},   // valid user
-          {"locked_out_user", "secret_sauce", false}, // locked user, cant login
-            {"problem_user", "secret_sauce", true},      // another valid user but problems after logging in
-          {"performance_glitch_user", "secret_sauce", true}      // another valid user but having performance glitch
-        };
+       return Config.USER_CREDENTIALS_ARRAY;
     }
 
    /**
@@ -95,7 +82,7 @@ public class LoginTest {
 
 
     @AfterClass
-    public void tearDown() {
+    public void unloadDriver() {
         if (driver != null) {
             driver.quit();
         }

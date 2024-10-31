@@ -16,12 +16,7 @@ public class BaseTest {
     
     @BeforeClass
     public void setup() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\saril\\eclipse-workspace\\Testing\\Drivers\\chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
-        driver.get(Config.BASE_URL);
-        
+    	driver= TestUtil.setupDriver();
     }
     @Test
     public void loginAsStandardUser() {
@@ -41,7 +36,7 @@ public class BaseTest {
     }
 
     @AfterClass
-    public void tearDown() {
+    public void unloadDriver() {
         if (driver != null) {
             driver.quit();
         }

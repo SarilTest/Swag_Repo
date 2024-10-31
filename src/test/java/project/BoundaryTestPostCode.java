@@ -10,11 +10,7 @@ public class BoundaryTestPostCode extends BaseTest {
 boolean isLoaded =false;
     @DataProvider(name = "PostalCodeBoundaryData")
     public Object[][] postalCodeData() {
-        return new Object[][]{
-                {"John", "Doe", "12345"},        // Minimum Boundary (5 characters)
-                {"John", "Doe", "1234567890"},   // Maximum Boundary (10 characters)
-                {"John", "Doe", "12345678901"}   // Above Maximum Boundary (11 characters)
-        };
+        return Config.POST_CODE_ARRAY;
     }
 
     @Test(dataProvider = "PostalCodeBoundaryData")

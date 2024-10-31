@@ -9,7 +9,7 @@ public class AddToCartTest extends BaseTest {
 	
 	
     @Test(priority = 0)
-    public void verifyProductPresence() {
+    public void testProductList() {
         // Example test to verify the presence of a specific product
         WebElement product = driver.findElement(By.xpath("//div[text()='Sauce Labs Backpack']"));
         Assert.assertTrue(product.isDisplayed(), "Sauce Labs Backpack is not displayed on the Products page.");
