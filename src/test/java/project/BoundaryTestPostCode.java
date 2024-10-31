@@ -7,7 +7,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class BoundaryTestPostCode extends BaseTest {
-int x=0;
+boolean isLoaded =false;
     @DataProvider(name = "PostalCodeBoundaryData")
     public Object[][] postalCodeData() {
         return new Object[][]{
@@ -20,8 +20,8 @@ int x=0;
     @Test(dataProvider = "PostalCodeBoundaryData")
     public void testPostalCodeBoundary(String firstName, String lastName, String postalCode) {
         // Navigate to the checkout information page
-    	if(x==0) {
-        x= navigateToCheckoutPage();
+    	if(!isLoaded) {
+    		isLoaded= navigateToCheckoutPage();
     	}
 
         // Enter checkout information
@@ -53,7 +53,7 @@ int x=0;
             Assert.assertTrue(errorMessage.isDisplayed(), "Error message should display for invalid postal code length: " + postalCode.length());
         }
     }
-    public int navigateToCheckoutPage() {
+    public boolean navigateToCheckoutPage() {
         // Add an item to the cart
     	WebElement addToCartButton = driver.findElement(By.xpath("(//button[contains(text(),'ADD TO CART')])[1]"));
         addToCartButton.click();
@@ -65,6 +65,6 @@ int x=0;
         // Proceed to the checkout information page
         WebElement checkoutButton = driver.findElement(By.xpath("//a[normalize-space()='CHECKOUT']"));
         checkoutButton.click();
-        return 1;
+        return true;
     }
 }
