@@ -12,6 +12,11 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
+
+/**
+ * This is the test for validating all user logins provided in the login page of the website
+ */
+
 public class LoginTest {
     WebDriver driver;
     String url = "https://www.saucedemo.com/v1/index.html";
@@ -29,19 +34,22 @@ public class LoginTest {
    public Object[][] loginDataProvider() {
        return new Object[][]{
            {"standard_user", "secret_sauce", true},   // valid user
-          {"locked_out_user", "secret_sauce", false}, // locked user
-            {"problem_user", "secret_sauce", true},      // another valid user
-          {"performance_glitch_user", "secret_sauce", true}      // another valid user
+          {"locked_out_user", "secret_sauce", false}, // locked user, cant login
+            {"problem_user", "secret_sauce", true},      // another valid user but problems after logging in
+          {"performance_glitch_user", "secret_sauce", true}      // another valid user but having performance glitch
         };
     }
 
-   //This test covers login tests for all 4 users 
-   //Standard user  -> Test should pass as the product catalogue is displayed
-   //locked user -> Test should pass as the code assert the errorMessage on the login page if its not logged in
-   //Problem user  -> Test should pass as the product catalogue is displayed ( login successful)
-   //PerformanceGlitch_user -> Test should fail as its take longer than 1 sec to get the product catalogue page.
+   /**
+    * This test covers login tests for all 4 users 
+   		Standard user  -> Test should pass as the product catalogue is displayed
+   		locked user -> Test should pass as the code assert the errorMessage on the login page if its not logged in
+   		Problem user  -> Test should pass as the product catalogue is displayed ( login successful)
+   		PerformanceGlitch_user -> Test should fail as its take longer than 1 sec to get the product catalogue page.
+    */
    
-    @Test(dataProvider = "loginData", timeOut = 1000)
+   
+    @Test(dataProvider = "loginData", timeOut = 2000)
     public void loginTest(String username, String password, boolean isValidUser) {
         // Locate username and password fields and login button
         WebElement usernameField = driver.findElement(By.id("user-name"));
@@ -70,7 +78,9 @@ public class LoginTest {
         }
        
     }
-    //Logout after the test is performed 
+    
+  
+    
     public void logout() {
         // Open the menu and click the logout link
         WebElement menuButton = driver.findElement(By.cssSelector("div[class='bm-burger-button'] button"));

@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 public class CheckoutTest extends BaseTest {
 
-    @Test
+    @Test ( priority = 1)
     public void completeCheckoutProcess() {
         // Step 1: Add two products to the cart
     	WebElement addToCartButton1 = driver.findElement(By.xpath("(//button[contains(text(),'ADD TO CART')])[1]"));

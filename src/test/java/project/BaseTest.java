@@ -12,8 +12,8 @@ import java.time.Duration;
 
 public class BaseTest {
     protected WebDriver driver;
-   
 
+    
     @BeforeClass
     public void setup() {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\saril\\eclipse-workspace\\Testing\\Drivers\\chromedriver.exe");

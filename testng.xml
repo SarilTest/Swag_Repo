@@ -4,11 +4,11 @@
   <test thread-count="5" name="Test">
     <classes>
       <class name="project.BaseTest"/>
-      <class name="project.CheckoutTest"/>
       <class name="project.AddToCartTest"/>
       <class name="project.LoginTest"/>
       <class name="project.ProductsPageTest"/>
       <class name="project.BoundaryTestPostCode"/>
-    </classes>
+      <class name="project.CheckoutTest"/>
+        </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

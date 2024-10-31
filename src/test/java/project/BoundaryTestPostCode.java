@@ -7,7 +7,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class BoundaryTestPostCode extends BaseTest {
-
+int x=0;
     @DataProvider(name = "PostalCodeBoundaryData")
     public Object[][] postalCodeData() {
         return new Object[][]{
@@ -20,7 +20,9 @@ public class BoundaryTestPostCode extends BaseTest {
     @Test(dataProvider = "PostalCodeBoundaryData")
     public void testPostalCodeBoundary(String firstName, String lastName, String postalCode) {
         // Navigate to the checkout information page
-        navigateToCheckoutPage();
+    	if(x==0) {
+        x= navigateToCheckoutPage();
+    	}
 
         // Enter checkout information
         WebElement firstNameField = driver.findElement(By.id("first-name"));
@@ -36,23 +38,24 @@ public class BoundaryTestPostCode extends BaseTest {
         postalCodeField.sendKeys(postalCode);
 
         // Attempt to continue to the next step in the checkout process
-        WebElement continueButton = driver.findElement(By.id("continue"));
+        WebElement continueButton = driver.findElement(By.cssSelector("input[value='CONTINUE']"));
         continueButton.click();
 
         if (postalCode.length() >= 5 && postalCode.length() <= 10) {
             // Expected to succeed if postal code is within valid length range
-            WebElement overviewTitle = driver.findElement(By.className("title"));
+            WebElement overviewTitle = driver.findElement(By.xpath("(//div[@class='subheader'])[1]"));
             Assert.assertTrue(overviewTitle.isDisplayed(), "Checkout should proceed with postal code length: " + postalCode.length());
             driver.navigate().back(); // Go back to the cart to reset for the next test
+            
         } else {
             // Expected to fail if postal code length exceeds maximum
             WebElement errorMessage = driver.findElement(By.cssSelector("[data-test='error']"));
             Assert.assertTrue(errorMessage.isDisplayed(), "Error message should display for invalid postal code length: " + postalCode.length());
         }
     }
-    public void navigateToCheckoutPage() {
+    public int navigateToCheckoutPage() {
         // Add an item to the cart
-        WebElement addToCartButton = driver.findElement(By.id("add-to-cart-sauce-labs-backpack"));
+    	WebElement addToCartButton = driver.findElement(By.xpath("(//button[contains(text(),'ADD TO CART')])[1]"));
         addToCartButton.click();
         
         // Navigate to the cart page
@@ -60,7 +63,8 @@ public class BoundaryTestPostCode extends BaseTest {
         cartButton.click();
 
         // Proceed to the checkout information page
-        WebElement checkoutButton = driver.findElement(By.id("checkout"));
+        WebElement checkoutButton = driver.findElement(By.xpath("//a[normalize-space()='CHECKOUT']"));
         checkoutButton.click();
+        return 1;
     }
 }
