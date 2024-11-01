@@ -32,7 +32,6 @@ public class CheckoutTest extends BaseTest {
         WebElement firstNameField = driver.findElement(By.id("first-name"));
         WebElement lastNameField = driver.findElement(By.id("last-name"));
         WebElement postalCodeField = driver.findElement(By.id("postal-code"));
-        
         firstNameField.sendKeys("Tom");
         lastNameField.sendKeys("Cruise");
         postalCodeField.sendKeys("AB111AB");
